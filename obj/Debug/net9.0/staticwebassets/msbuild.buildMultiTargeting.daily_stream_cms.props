@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\daily_stream_cms.props" />
+</Project>
