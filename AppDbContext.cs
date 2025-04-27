@@ -5,13 +5,8 @@ namespace daily_stream_cms
 {
     public class AppDbContext : DbContext
     {
-        // Constructor - tell DbContext how to connect
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // 👇 Register your models (these will become Tables)
         public DbSet<Role> Roles { get; set; }
         public DbSet<Blob> Blobs { get; set; }
         public DbSet<User> Users { get; set; }
@@ -25,90 +20,101 @@ namespace daily_stream_cms
         {
             base.OnModelCreating(modelBuilder);
 
-            // Admin and Role relationship
+            // Admin Relationships
             modelBuilder.Entity<Admin>()
-                .HasOne(u => u.Role)
+                .HasOne(a => a.Role)
                 .WithMany()
-                .HasForeignKey(u => u.RoleId)
+                .HasForeignKey(a => a.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Admin and ProfileBlob relationship
             modelBuilder.Entity<Admin>()
-                .HasOne(u => u.ProfileBlob)
+                .HasOne(a => a.ProfileBlob)
                 .WithMany()
-                .HasForeignKey(u => u.ProfileBlobId)
+                .HasForeignKey(a => a.ProfileBlobId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Admin and Cover relationship
             modelBuilder.Entity<Admin>()
-                .HasOne(u => u.Cover)
+                .HasOne(a => a.Cover)
                 .WithMany()
-                .HasForeignKey(u => u.CoverId)
+                .HasForeignKey(a => a.CoverId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Category and ParentCategory relationship
+            // Category Relationships
             modelBuilder.Entity<Category>()
-                .HasOne(u => u.ParentCategory)
+                .HasOne(c => c.ParentCategory)
                 .WithMany()
-                .HasForeignKey(u => u.ParentCategoryId)
+                .HasForeignKey(c => c.ParentCategoryId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Article and Category relationship
+            // Article Relationships
             modelBuilder.Entity<Article>()
-                .HasOne(u => u.Category)
+                .HasOne(a => a.Category)
                 .WithMany()
-                .HasForeignKey(u => u.CategoryId)
+                .HasForeignKey(a => a.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Article and Author relationship
             modelBuilder.Entity<Article>()
-                .HasOne(u => u.Author)
+                .HasOne(a => a.Author)
                 .WithMany()
-                .HasForeignKey(u => u.CreatorId)
+                .HasForeignKey(a => a.CreatorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Article and Blob relationship
             modelBuilder.Entity<Article>()
-                .HasOne(u => u.Blob)
+                .HasOne(a => a.Blob)
                 .WithMany()
-                .HasForeignKey(u => u.BlobId)
+                .HasForeignKey(a => a.BlobId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // Article and Thumbnail relationship
             modelBuilder.Entity<Article>()
-                .HasOne(u => u.Thumbnail)
+                .HasOne(a => a.Thumbnail)
                 .WithMany()
-                .HasForeignKey(u => u.ThumbnailId)
+                .HasForeignKey(a => a.ThumbnailId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Comment Relationships
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Comment>()
-        .HasOne(u => u.User)
-        .WithMany()
-        .HasForeignKey(u => u.UserId)
-        .OnDelete(DeleteBehavior.NoAction);
+                .HasOne(c => c.Article)
+                .WithMany()
+                .HasForeignKey(c => c.ArticleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Comment>()
-        .HasOne(u => u.Article)
-        .WithMany()
-        .HasForeignKey(u => u.ArticleId)
-        .OnDelete(DeleteBehavior.NoAction);
-
+            // AdminArticle Many-to-Many
             modelBuilder.Entity<AdminArticle>()
-    .HasKey(aa => new { aa.AdminId, aa.ArticleId });
+                .HasKey(aa => new { aa.AdminId, aa.ArticleId });
 
             modelBuilder.Entity<AdminArticle>()
                 .HasOne(aa => aa.Admin)
                 .WithMany(a => a.AdminArticles)
                 .HasForeignKey(aa => aa.AdminId)
-        .OnDelete(DeleteBehavior.NoAction);
-
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<AdminArticle>()
                 .HasOne(aa => aa.Article)
                 .WithMany(a => a.AdminArticles)
                 .HasForeignKey(aa => aa.ArticleId)
-        .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.NoAction);
 
+            // ArticleKeyword Many-to-Many
+            modelBuilder.Entity<ArticleKeyword>()
+                .HasKey(ak => new { ak.ArticleId, ak.KeywordId });
+
+            modelBuilder.Entity<ArticleKeyword>()
+                .HasOne(ak => ak.Article)
+                .WithMany(a => a.ArticleKeywords)
+                .HasForeignKey(ak => ak.ArticleId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ArticleKeyword>()
+                .HasOne(ak => ak.Keyword)
+                .WithMany(k => k.ArticleKeywords)
+                .HasForeignKey(ak => ak.KeywordId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

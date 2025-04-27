@@ -9,5 +9,6 @@ namespace daily_stream_cms.Models
         public string Name { get; set; }
         public bool IsFiltered { get; set; } = false;
         public int SortNumber { get; set; } = 0;
+        public ICollection<ArticleKeyword> ArticleKeywords { get; set; }
     }
 }

@@ -38,5 +38,6 @@ namespace daily_stream_cms.Models
         public bool IsDraft { get; set; } = false;
 
         public ICollection<AdminArticle> AdminArticles { get; set; }
+        public ICollection<ArticleKeyword> ArticleKeywords { get; set; }
     }
 }

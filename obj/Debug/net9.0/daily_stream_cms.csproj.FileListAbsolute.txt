@@ -227,3 +227,4 @@ C:\Users\User\Documents\GitHub\daily_stream_cms\daily_stream_cms\obj\Debug\net9.
 C:\Users\User\Documents\GitHub\daily_stream_cms\daily_stream_cms\obj\Debug\net9.0\daily_stream_cms.pdb
 C:\Users\User\Documents\GitHub\daily_stream_cms\daily_stream_cms\obj\Debug\net9.0\daily_stream_cms.genruntimeconfig.cache
 C:\Users\User\Documents\GitHub\daily_stream_cms\daily_stream_cms\obj\Debug\net9.0\ref\daily_stream_cms.dll
+C:\Users\User\Documents\GitHub\daily_stream_cms\daily_stream_cms\obj\Debug\net9.0\daily_stream_cms.sourcelink.json
