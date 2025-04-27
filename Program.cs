@@ -1,4 +1,5 @@
-using daily_stream_cms;
+﻿using daily_stream_cms;
+using daily_stream_cms.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// 👇 Add Controllers
+builder.Services.AddControllers();
+// Register TodosService
+builder.Services.AddScoped<RolesService>();
 
 var app = builder.Build();
 
@@ -28,6 +33,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",

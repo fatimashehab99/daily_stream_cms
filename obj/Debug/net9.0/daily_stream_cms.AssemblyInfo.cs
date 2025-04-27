@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("daily_stream_cms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0843c2acc0111295ecb0f896c6e64ff77b8671ef")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5863dcbe59180c4b741f59b88649a37d8c35792")]
 [assembly: System.Reflection.AssemblyProductAttribute("daily_stream_cms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("daily_stream_cms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
