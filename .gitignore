@@ -1,25 +1,7 @@
-# Build folders
-bin/
-obj/
-
-# User-specific files
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-# Visual Studio files
-.vscode/
+*.dll
 .vs/
-
-# Rider/JetBrains files
-.idea/
-
-# Logs and cache
-*.log
-*.tmp
-*.cache
-
-# OS files
-.DS_Store
-Thumbs.db
+bin/
+obj
+bin
+.cache
+.csproj
